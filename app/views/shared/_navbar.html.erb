@@ -2,6 +2,7 @@
     </div>
             <%= link_to "Sign Up", new_employee_registration_path, class: "btn btn-outline-warning" %>
             <%= link_to "Log In", new_employee_session_path, class: "btn btn-outline-success"  %>
+            <%= link_to "Log Out", destroy_employee_session_path, method: :delete %>
     </div>
     
 </nav>
