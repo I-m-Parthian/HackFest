@@ -14,9 +14,12 @@
  // Custom bootstrap variables must be set or imported *before* bootstrap.
  @import "bootstrap";
 
+// style navbar/header
+.navbar{
+    background-color: #04009a;
+}
 
 //  style footer section
-
 .footer{
     position: fixed;
    left: 0;
