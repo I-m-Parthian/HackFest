@@ -1,24 +1,27 @@
-# README
+# HackFest - A hackathon/challenge posting portal
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Software Requirements
 
-Things you may want to cover:
+- Ruby 2.6.6
+- Rails 5.1.0
 
-* Ruby version
+## Installation
 
-* System dependencies
+- To play with the code simply clone the repo on your local system
+- before running this project one must install the following dependencies inside the root directory of the project
+```sh
+$ bundle install
+$ yarn
+```
 
-* Configuration
+Note: The database used in the project is MySQL. So, one must install MySQL before running the project
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+- Creating and migrating the database
+```sh
+$ rake db:create
+$ rake db:migrate
+```
+- Hosting on a local server
+```sh
+$ rails server
+```
