@@ -1,32 +1,29 @@
-<%= form_with(model: challenge, local: true) do |form| %>
-  <% if challenge.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(challenge.errors.count, "error") %> prohibited this challenge from being saved:</h2>
-
-      <ul>
-      <% challenge.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+<div class="row">
+  <div class="col-sm-12 mt-5">
+    <%= form_with(model: challenge, local: true) do |form| %>
+      <% if challenge.errors.any? %>
+        <div class="alert alert-danger">
+          <% challenge.errors.full_messages.each do |message| %>
+            <div><%= message %></div>
+          <% end %>
+        </div>
       <% end %>
-      </ul>
-    </div>
-  <% end %>
 
-  <div class="field">
-    <%= form.label :title %>
-    <%= form.text_field :title, id: :challenge_title %>
-  </div>
+      <div class="form-group ">
+        <%= form.text_field :title, id: :challenge_title, placeholder: "Title", class: "form-control" %>
+      </div>
 
-  <div class="field">
-    <%= form.label :description %>
-    <%= form.text_area :description, id: :challenge_description %>
-  </div>
+      <div class="form-group ">
+        <%= form.text_area :description, id: :challenge_description,placeholder: "Description",  class: "form-control", rows: "5" %>
+      </div>
 
-  <div class="field">
-    <%= form.label :tags %>
-    <%= form.text_field :tags, id: :challenge_tags %>
-  </div>
+      <div class="form-group ">
+        <%= form.select(:tags, %w[Bit-Manipulation Greedy NumberTheory Searching Sorting String Trees Others], {:prompt => "-Select tag-"}, { :class => "custom-select mb-3"})%>
+      </div>
 
-  <div class="actions">
-    <%= form.submit %>
+      <div class="actions">
+        <%= form.submit class: "btn btn-outline-primary"%>
+      </div>
+    <% end %>
   </div>
-<% end %>
+</div>

@@ -22,10 +22,11 @@ class ChallengesController < ApplicationController
   # POST /challenges or /challenges.json
   def create
     @challenge = Challenge.new(challenge_params)
-
+    
     respond_to do |format|
       if @challenge.save
-        format.html { redirect_to @challenge, notice: "Challenge was successfully created." }
+        flash[:notice] = "Challenge was successfully created!!"
+        format.html { redirect_to controller: 'challenges', action: 'index'}
         format.json { render :show, status: :created, location: @challenge }
       else
         format.html { render :new, status: :unprocessable_entity }
