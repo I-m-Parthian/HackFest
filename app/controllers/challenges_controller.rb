@@ -1,5 +1,5 @@
 class ChallengesController < ApplicationController
-  before_action :set_challenge, only: %i[ show edit update destroy ]
+  before_action :set_challenge, only: %i[ show edit update destroy upvote]
 
   # GET /challenges or /challenges.json
   def index
@@ -53,6 +53,22 @@ class ChallengesController < ApplicationController
     @challenge.destroy
     respond_to do |format|
       format.html { redirect_to challenges_url, notice: "Challenge was successfully destroyed." }
+      format.json { head :no_content }
+    end
+  end
+
+  # upvote a challenge/1
+  def upvote
+    @validate = Upvote.where({employee_id: current_employee.id, challenge_id: @challenge.id})
+    if @validate.blank?  
+      @vote = Upvote.new({:employee_id => current_employee.id, :challenge_id => @challenge.id})
+      @vote.save
+      flash[:notice] = "Challenge Upvoted"
+    else
+      flash[:alert] = "Already Upvoted"
+    end
+    respond_to do |format|
+      format.html { redirect_to root_path }
       format.json { head :no_content }
     end
   end

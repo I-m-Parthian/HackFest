@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20210501185507) do
+ActiveRecord::Schema.define(version: 20210503073402) do
 
   create_table "challenges", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "title"
@@ -33,4 +33,15 @@ ActiveRecord::Schema.define(version: 20210501185507) do
     t.index ["reset_password_token"], name: "index_employees_on_reset_password_token", unique: true
   end
 
+  create_table "upvotes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "employee_id"
+    t.bigint "challenge_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["challenge_id"], name: "index_upvotes_on_challenge_id"
+    t.index ["employee_id"], name: "index_upvotes_on_employee_id"
+  end
+
+  add_foreign_key "upvotes", "challenges"
+  add_foreign_key "upvotes", "employees"
 end
