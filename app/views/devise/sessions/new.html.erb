@@ -8,10 +8,12 @@
     <hr>
       <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
           <div class="form-group my-4">
-            <%= f.email_field :email, autofocus: true, autocomplete: "email",placeholder: "Email Address",class: "form-control" %>
+            <%= f.label :login  %>
+            <%= f.text_field :login, autofocus: true,placeholder: "Employee id or email",class: "form-control" %>
           </div>
 
           <div class="form-group my-4">
+            <%= f.label :password  %>
             <%= f.password_field :password, autocomplete: "current-password",placeholder: "Password",class: "form-control" %>
           </div>
 
