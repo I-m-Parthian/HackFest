@@ -63,6 +63,7 @@ class ChallengesController < ApplicationController
     if @validate.blank?  
       @vote = Upvote.new({:employee_id => current_employee.id, :challenge_id => @challenge.id})
       @vote.save
+      @challenge.increment!(:votes)
       flash[:notice] = "Challenge Upvoted"
     else
       flash[:alert] = "Already Upvoted"

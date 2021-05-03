@@ -8,6 +8,7 @@
       <th scope="col">Title</th>
       <th scope="col">Description</th>
       <th scope="col">VoteCount</th>
+      <th scope="col">Upvote</th>
       <th scope="col">Tags</th>
       <th scope="col">Created at</th>
     </tr>
@@ -18,7 +19,10 @@
         <td><%= challenge.id %></td>
         <td><%= challenge.title %></td>
         <td><%= challenge.description %></td>
-        <td>   
+        <td>
+          <%= challenge.votes%>
+        </td>
+        <td>
           <%= link_to upvote_path(challenge) do %>
             <i class="fas fa-vote-yea"></i> 
           <% end %> 
