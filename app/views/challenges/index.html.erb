@@ -1,5 +1,6 @@
-<h1 class="text-primary">Challenges</h1>
-<%= link_to 'Add New Challenge', new_challenge_path , class: "btn btn-outline-primary" %>
+<h1 class="text-primary text-center my-3">Challenges</h1>
+
+<%= link_to 'Add New Challenge', new_challenge_path , class: "btn btn-outline-primary my-4" %>
 
 <table class="table">
   <thead class="thead-dark">
@@ -9,6 +10,7 @@
       <th scope="col">Description</th>
       <th scope="col">VoteCount</th>
       <th scope="col">Upvote</th>
+      <th scope="col">Created By</th>
       <th scope="col">Tags</th>
       <th scope="col">Created at</th>
     </tr>
@@ -27,6 +29,8 @@
             <i class="fas fa-vote-yea"></i> 
           <% end %> 
         </td>
+        <%# <td><%= challenge.employee_id %>
+        <td>EO1</td>
         <td><%= challenge.tags %></td>  
         <td><%= challenge.created_at %></td>
       </tr>
