@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20210504084735) do
+ActiveRecord::Schema.define(version: 20210504102116) do
 
   create_table "challenges", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "title"
@@ -22,6 +22,16 @@ ActiveRecord::Schema.define(version: 20210504084735) do
     t.bigint "employee_id"
     t.string "created_by", default: "", null: false
     t.index ["employee_id"], name: "index_challenges_on_employee_id"
+  end
+
+  create_table "collaborates", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "challenge_id"
+    t.bigint "employee_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "emp_id"
+    t.index ["challenge_id"], name: "index_collaborates_on_challenge_id"
+    t.index ["employee_id"], name: "index_collaborates_on_employee_id"
   end
 
   create_table "employees", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -47,6 +57,8 @@ ActiveRecord::Schema.define(version: 20210504084735) do
   end
 
   add_foreign_key "challenges", "employees"
+  add_foreign_key "collaborates", "challenges"
+  add_foreign_key "collaborates", "employees"
   add_foreign_key "upvotes", "challenges"
   add_foreign_key "upvotes", "employees"
 end

@@ -1,9 +1,10 @@
 class ChallengesController < ApplicationController
-  before_action :set_challenge, only: %i[ show edit update destroy upvote]
+  before_action :set_challenge, only: %i[ show edit update destroy upvote collaborate]
 
   # GET /challenges or /challenges.json
   def index
     @challenges = Challenge.all
+    
   end
 
   # GET /challenges/1 or /challenges/1.json
@@ -57,7 +58,7 @@ class ChallengesController < ApplicationController
     end
   end
 
-  # upvote a challenge/1
+  # upvote a challenge
   def upvote
     if @challenge.employee_id != current_employee.id
       @validate = Upvote.where({employee_id: current_employee.id, challenge_id: @challenge.id})
@@ -65,12 +66,32 @@ class ChallengesController < ApplicationController
         @vote = Upvote.new({:employee_id => current_employee.id, :challenge_id => @challenge.id})
         @vote.save
         @challenge.increment!(:votes)
-        flash[:notice] = "Challenge Upvoted"
+        flash[:notice] = "Challenge upvoted"
       else
-        flash[:alert] = "Already Upvoted"
+        flash[:alert] = "Already upvoted"
       end
     else
       flash[:alert] = "Can't upvote own challenge"
+    end
+    respond_to do |format|
+      format.html { redirect_to root_path }
+      format.json { head :no_content }
+    end
+  end
+
+  # make employee a collaborator
+  def collaborate
+    if @challenge.employee_id != current_employee.id
+      @check_exist = Collaborate.where({challenge_id: @challenge.id, employee_id: current_employee.id})
+      if @check_exist.blank?
+        @collaborate = Collaborate.new({:challenge_id => @challenge.id, :employee_id => current_employee.id, :emp_id => current_employee.emp_id})
+        @collaborate.save
+        flash[:notice] = "Congrats, You are collaborator now!"
+      else
+        flash[:alert] = "Already a collaborator"
+      end
+    else
+      flash[:alert] = "Can't collaborate own challenge"
     end
     respond_to do |format|
       format.html { redirect_to root_path }

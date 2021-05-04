@@ -11,8 +11,10 @@
       <th scope="col">Vote Count</th>
       <th scope="col">Upvote</th>
       <th scope="col">Created By</th>
-      <th scope="col">Tags</th>
       <th scope="col">Created at</th>
+      <th scope="col">Tags</th>
+      <th scope="col">Collaborators</th>
+      <th scope="col"></th>
     </tr>
   </thead>
   <tbody>
@@ -36,8 +38,30 @@
         <td>
           <%= challenge.created_by %>
         </td>
-        <td><%= challenge.tags %></td>  
         <td><%= challenge.created_at %></td>
+        <td><%= challenge.tags %></td>  
+        <td>
+          <% @collaborators =  Collaborate.where(challenge_id: challenge.id) %>
+            <% if !@collaborators.blank?  %>
+              <% @count=0 %>
+              <% @collaborators.each do | collaborator | %>
+                <%= collaborator.emp_id %>
+                <% if @count>0 %>
+                  <%= " "  %>
+                <% end %>
+              <% end %>
+            <% end %>
+
+        </td>
+        <td>
+          <% if challenge.employee_id != current_employee.id %>
+            <%= link_to collaborate_path(challenge) do %>
+              <i class="far fa-check-circle"></i>
+            <% end %> 
+          <% else %>
+            <i class="far fa-check-circle text-muted"></i>
+          <% end %>
+        </td>
       </tr>
     <% end %>
   </tbody>
