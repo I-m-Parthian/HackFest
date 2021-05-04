@@ -59,14 +59,18 @@ class ChallengesController < ApplicationController
 
   # upvote a challenge/1
   def upvote
-    @validate = Upvote.where({employee_id: current_employee.id, challenge_id: @challenge.id})
-    if @validate.blank?  
-      @vote = Upvote.new({:employee_id => current_employee.id, :challenge_id => @challenge.id})
-      @vote.save
-      @challenge.increment!(:votes)
-      flash[:notice] = "Challenge Upvoted"
+    if @challenge.employee_id != current_employee.id
+      @validate = Upvote.where({employee_id: current_employee.id, challenge_id: @challenge.id})
+      if @validate.blank?  
+        @vote = Upvote.new({:employee_id => current_employee.id, :challenge_id => @challenge.id})
+        @vote.save
+        @challenge.increment!(:votes)
+        flash[:notice] = "Challenge Upvoted"
+      else
+        flash[:alert] = "Already Upvoted"
+      end
     else
-      flash[:alert] = "Already Upvoted"
+      flash[:alert] = "Can't upvote own challenge"
     end
     respond_to do |format|
       format.html { redirect_to root_path }
