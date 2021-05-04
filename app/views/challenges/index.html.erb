@@ -8,7 +8,7 @@
       <th scope="col">Challenge Id</th>
       <th scope="col">Title</th>
       <th scope="col">Description</th>
-      <th scope="col">VoteCount</th>
+      <th scope="col">Vote Count</th>
       <th scope="col">Upvote</th>
       <th scope="col">Created By</th>
       <th scope="col">Tags</th>
@@ -25,12 +25,16 @@
           <%= challenge.votes%>
         </td>
         <td>
-          <%= link_to upvote_path(challenge) do %>
-            <i class="fas fa-vote-yea"></i> 
-          <% end %> 
+          <% if challenge.employee_id != current_employee.id %>
+            <%= link_to upvote_path(challenge) do %>
+              <i class="fas fa-vote-yea"></i> 
+            <% end %> 
+          <% else %>
+            <i class="fas fa-vote-yea text-muted"></i>
+          <% end %>
         </td>
         <td>
-          <%= challenge.employee_id %>
+          <%= challenge.created_by %>
         </td>
         <td><%= challenge.tags %></td>  
         <td><%= challenge.created_at %></td>
