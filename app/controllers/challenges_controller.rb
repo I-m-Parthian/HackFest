@@ -4,7 +4,7 @@ class ChallengesController < ApplicationController
   # GET /challenges or /challenges.json
   def index
     @challenges = Challenge.all
-    
+    @challenge = Challenge.new
   end
 
   # GET /challenges/1 or /challenges/1.json
@@ -30,7 +30,7 @@ class ChallengesController < ApplicationController
         format.html { redirect_to controller: 'challenges', action: 'index'}
         format.json { render :show, status: :created, location: @challenge }
       else
-        format.html { render :new, status: :unprocessable_entity }
+        format.html { redirect_to root_url, status: :unprocessable_entity }
         format.json { render json: @challenge.errors, status: :unprocessable_entity }
       end
     end
@@ -43,7 +43,7 @@ class ChallengesController < ApplicationController
         format.html { redirect_to @challenge, notice: "Challenge was successfully updated." }
         format.json { render :show, status: :ok, location: @challenge }
       else
-        format.html { render :edit, status: :unprocessable_entity }
+        format.html { redirect_to root_path, status: :unprocessable_entity }
         format.json { render json: @challenge.errors, status: :unprocessable_entity }
       end
     end

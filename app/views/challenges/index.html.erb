@@ -1,68 +1,72 @@
-<h1 class="text-primary text-center my-3">Challenges</h1>
+<% content_for :title do %>
+    <h1 class="text-primary text-center">Challenges</h1>
+<% end %>
+<hr>
+<%#= link_to 'Add New Challenge', new_challenge_path , class: "btn btn-outline-primary my-4" %>
+<%= render "challenges/form", challenge: @challenge %>
+<hr>
 
-<%= link_to 'Add New Challenge', new_challenge_path , class: "btn btn-outline-primary my-4" %>
-
-<table class="table">
-  <thead class="thead-dark">
-    <tr>
-      <th scope="col">Challenge Id</th>
-      <th scope="col">Title</th>
-      <th scope="col">Description</th>
-      <th scope="col">Vote Count</th>
-      <th scope="col">Upvote</th>
-      <th scope="col">Created By</th>
-      <th scope="col">Created at</th>
-      <th scope="col">Tags</th>
-      <th scope="col">Collaborators</th>
-      <th scope="col"></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @challenges.each do |challenge| %>
+<div>
+  <table class="table">
+    <thead class="thead-dark">
       <tr>
-        <td><%= challenge.id %></td>
-        <td><%= challenge.title %></td>
-        <td><%= challenge.description %></td>
-        <td>
-          <%= challenge.votes%>
-        </td>
-        <td>
-          <% if challenge.employee_id != current_employee.id %>
-            <%= link_to upvote_path(challenge) do %>
-              <i class="fas fa-vote-yea"></i> 
-            <% end %> 
-          <% else %>
-            <i class="fas fa-vote-yea text-muted"></i>
-          <% end %>
-        </td>
-        <td>
-          <%= challenge.created_by %>
-        </td>
-        <td><%= challenge.created_at %></td>
-        <td><%= challenge.tags %></td>  
-        <td>
-          <% @collaborators =  Collaborate.where(challenge_id: challenge.id) %>
+        <th scope="col">Challenge Id</th>
+        <th scope="col">Title</th>
+        <th scope="col">Description</th>
+        <th scope="col">Vote Count</th>
+        <th scope="col">Upvote</th>
+        <th scope="col">Created By</th>
+        <th scope="col">Created at</th>
+        <th scope="col">Tags</th>
+        <th scope="col">Collaborators</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @challenges.each do |challenge| %>
+        <tr>
+          <td><%= challenge.id %></td>
+          <td><%= challenge.title %></td>
+          <td><%= challenge.description %></td>
+          <td>
+            <%= challenge.votes%>
+          </td>
+          <td>
+            <% if challenge.employee_id != current_employee.id %>
+              <%= link_to upvote_path(challenge) do %>
+                <i class="fas fa-vote-yea"></i> 
+              <% end %> 
+            <% else %>
+              <i class="fas fa-vote-yea text-muted"></i>
+            <% end %>
+          </td>
+          <td>
+            <%= challenge.created_by %>
+          </td>
+          <td><%= challenge.created_at %></td>
+          <td><%= challenge.tags %></td>  
+          <td>
+            <% @collaborators =  Collaborate.where(challenge_id: challenge.id) %>
             <% if !@collaborators.blank?  %>
-              <% @count=0 %>
               <% @collaborators.each do | collaborator | %>
                 <%= collaborator.emp_id %>
-                <% if @count>0 %>
-                  <%= " "  %>
-                <% end %>
+                <% " " %>
               <% end %>
             <% end %>
 
-        </td>
-        <td>
-          <% if challenge.employee_id != current_employee.id %>
-            <%= link_to collaborate_path(challenge) do %>
-              <i class="far fa-check-circle"></i>
-            <% end %> 
-          <% else %>
-            <i class="far fa-check-circle text-muted"></i>
-          <% end %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+          </td>
+          <td>
+            <% if challenge.employee_id != current_employee.id %>
+              <%= link_to collaborate_path(challenge) do %>
+                <i class="far fa-check-circle"></i>
+              <% end %> 
+            <% else %>
+              <i class="far fa-check-circle text-muted"></i>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
