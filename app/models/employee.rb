@@ -1,5 +1,8 @@
 class Employee < ApplicationRecord
   attr_accessor :login
+  has_many :challenge
+  has_many :upvote
+  has_many :collaborate
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
