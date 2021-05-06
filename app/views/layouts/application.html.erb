@@ -14,8 +14,8 @@
   <body>
     <%= render partial: "shared/navbar"  %>
     <div class="container-fluid">
-      <%= yield :title %>
       <%= render partial: "shared/alert"  %>
+      <%= yield :title %>
       <%= yield %>
     </div>
     <%= render partial: "shared/footer" %>

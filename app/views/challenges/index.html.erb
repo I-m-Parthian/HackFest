@@ -10,13 +10,33 @@
   <table class="table">
     <thead class="thead-dark">
       <tr>
-        <th scope="col">Challenge Id</th>
-        <th scope="col">Title</th>
+        <th scope="col">
+          Challenge Id
+          <%= link_to :sort => "id" do %>
+            <i class="fas fa-sort-numeric-down"></i>
+          <% end %>
+        </th>
+        <th scope="col">
+          Title
+          <%= link_to :sort => "title" do %>
+            <i class="fas fa-sort-alpha-down"></i>
+          <% end %>
+        </th>
         <th scope="col">Description</th>
-        <th scope="col">Vote Count</th>
+        <th scope="col">
+          Vote Count
+          <%= link_to :sort => "votes" do %>
+            <i class="fas fa-sort-numeric-down"></i>
+          <% end %>
+        </th>
         <th scope="col">Upvote</th>
         <th scope="col">Created By</th>
-        <th scope="col">Created at</th>
+        <th scope="col">
+          Created at
+          <%= link_to :sort => "created_at" do %>
+            <i class="fas fa-sort-numeric-down"></i>
+          <% end %>
+        </th>
         <th scope="col">Tags</th>
         <th scope="col">Collaborators</th>
         <th scope="col"></th>

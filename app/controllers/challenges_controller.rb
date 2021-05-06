@@ -3,7 +3,7 @@ class ChallengesController < ApplicationController
 
   # GET /challenges or /challenges.json
   def index
-    @challenges = Challenge.all
+    @challenges = Challenge.order(params[:sort])
     @challenge = Challenge.new
   end
 
@@ -30,7 +30,8 @@ class ChallengesController < ApplicationController
         format.html { redirect_to controller: 'challenges', action: 'index'}
         format.json { render :show, status: :created, location: @challenge }
       else
-        format.html { redirect_to root_url, status: :unprocessable_entity }
+        flash[:alert] = "Can't create empty challenge"
+        format.html { redirect_to controller: 'challenges', action: 'index' }
         format.json { render json: @challenge.errors, status: :unprocessable_entity }
       end
     end
