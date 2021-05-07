@@ -16,7 +16,7 @@ RSpec.describe Employee, type: :model do
   it "validates emp_id" do
     subject.emp_id = 'E09'
     subject.validate 
-    expect(subject.errors[:emp_id]).to_not include
+    expect(subject.errors[:emp_id]).to include
   end
 
 end
