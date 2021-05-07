@@ -4,7 +4,9 @@
             <%# <%= link_to "Log In", new_employee_session_path, class: "btn btn-outline-success" %>
             <%= link_to "HackFest", root_path, class: "navbar-brand mx-auto" %>
             <% if employee_signed_in?  %>
-                <%= link_to "Log Out", destroy_employee_session_path, method: :delete, class: "btn btn-outline-warning" %>
+                <%= link_to destroy_employee_session_path, class: "btn btn-outline-warning", method: :delete do %>
+                    Log Out (<%= current_employee.emp_id %>)
+                 <% end %>
             <% end %>
     </div>
     
